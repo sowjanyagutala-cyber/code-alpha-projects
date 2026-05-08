@@ -1,14 +1,29 @@
-// Function to add a background color to the navbar after scrolling
-window.addEventListener('scroll', () => {
-    const nav = document.querySelector('nav');
-    if (window.scrollY > 50) {
-        nav.style.padding = '15px 8%';
-        nav.style.background = 'rgba(255, 255, 255, 0.95)';
-    } else {
-        nav.style.padding = '20px 8%';
-        nav.style.background = '#fff';
-    }
-});
+const display = document.getElementById('display');
 
-// Professional Welcome Message
-console.log("Welcome to Soujanya's Professional Portfolio!");
+// Function to append numbers and operators to the display
+function appendToDisplay(input) {
+    display.value += input;
+}
+
+// Function to clear the entire display
+function clearDisplay() {
+    display.value = "";
+}
+
+// Function to delete the last character entered
+function deleteLast() {
+    display.value = display.value.slice(0, -1);
+}
+
+// Function to perform the calculation and show the result
+function calculate() {
+    try {
+        if (display.value === "") return;
+        // The eval function evaluates the string expression
+        display.value = eval(display.value);
+    } catch (error) {
+        display.value = "Error";
+        // Reset display after 1.5 seconds if there's an error
+        setTimeout(clearDisplay, 1500);
+    }
+}
