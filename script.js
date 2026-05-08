@@ -1,29 +1,34 @@
-const display = document.getElementById('display');
+let currentImageIndex = 0;
+const images = [
+    "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800",
+    "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800",
+    "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800",
+    "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800",
+    "https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=800",
+    "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800"
+];
 
-// Function to append numbers and operators to the display
-function appendToDisplay(input) {
-    display.value += input;
+function openLightbox(index) {
+    currentImageIndex = index;
+    document.getElementById("lightbox").style.display = "flex";
+    document.getElementById("lightbox-img").src = images[currentImageIndex];
 }
 
-// Function to clear the entire display
-function clearDisplay() {
-    display.value = "";
+function closeLightbox() {
+    document.getElementById("lightbox").style.display = "none";
 }
 
-// Function to delete the last character entered
-function deleteLast() {
-    display.value = display.value.slice(0, -1);
+function changeImage(step) {
+    currentImageIndex += step;
+    if (currentImageIndex >= images.length) currentImageIndex = 0;
+    if (currentImageIndex < 0) currentImageIndex = images.length - 1;
+    document.getElementById("lightbox-img").src = images[currentImageIndex];
 }
 
-// Function to perform the calculation and show the result
-function calculate() {
-    try {
-        if (display.value === "") return;
-        // The eval function evaluates the string expression
-        display.value = eval(display.value);
-    } catch (error) {
-        display.value = "Error";
-        // Reset display after 1.5 seconds if there's an error
-        setTimeout(clearDisplay, 1500);
+// Close lightbox on clicking outside the image
+window.onclick = function(event) {
+    const lightbox = document.getElementById("lightbox");
+    if (event.target == lightbox) {
+        closeLightbox();
     }
 }

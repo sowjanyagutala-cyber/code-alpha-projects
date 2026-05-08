@@ -1,58 +1,81 @@
-body { 
-    font-family: sans-serif; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    height: 100vh; 
-    background-color: #f4f4f4; 
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.calculator { 
-    background: #333; 
-    padding: 20px; 
-    border-radius: 10px; 
-    box-shadow: 0px 10px 20px rgba(0,0,0,0.3); 
-    width: 320px;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
 }
 
-input { 
-    width: 100%; 
-    height: 55px; 
-    text-align: right; 
-    margin-bottom: 15px; 
-    font-size: 24px; 
-    border: none; 
-    border-radius: 5px; 
-    padding: 10px; 
-    box-sizing: border-box; 
-    background-color: white;
+header {
+    padding: 2rem;
+    background: #333;
+    color: white;
 }
 
-.buttons { 
-    display: grid; 
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 10px; 
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
 }
 
-button { 
-    padding: 20px; 
-    font-size: 18px; 
-    border: none; 
-    border-radius: 5px; 
-    cursor: pointer; 
-    background: #555; 
-    color: white; 
-    transition: background 0.3s;
+.gallery-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-button:hover { background: #777; }
+.gallery-item img:hover {
+    transform: scale(1.05);
+    filter: brightness(80%);
+}
 
-.operator { background: #f39c12; }
-.operator:hover { background: #e67e22; }
+/* Lightbox Styling */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
 
-.equal { background: #27ae60; grid-column: span 2; }
-.equal:hover { background: #2ecc71; }
+.lightbox img {
+    max-width: 80%;
+    max-height: 80%;
+    border-radius: 5px;
+    animation: zoomIn 0.3s ease;
+}
 
-.clear { background: #c0392b; grid-column: span 2; }
-.clear:hover { background: #e74c3c; }
+@keyframes zoomIn {
+    from { transform: scale(0.5); }
+    to { transform: scale(1); }
+}
+
+.close-btn, .prev, .next {
+    position: absolute;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+}
+
+.close-btn { top: 20px; right: 40px; }
+.prev { left: 20px; top: 50%; }
+.next { right: 20px; top: 50%; }
+
+.close-btn:hover, .prev:hover, .next:hover { color: #ccc; }
